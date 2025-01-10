@@ -198,13 +198,13 @@ jobs:
       # timeout-minutes: 10
       # run: docker compose build
 
-      - name: Run containers
-        timeout-minutes: 5
-        run: |
-          docker compose up -d
-          ./scripts/wait-script.sh
-        env:
-          WAIT_PORTS: 8080,8070,8060,8050
+      # - name: Run containers
+      #  timeout-minutes: 5
+      #  run: |
+      #    docker compose up -d
+      #    ./scripts/wait-script.sh
+      #  env:
+      #    WAIT_PORTS: 8080,8070,8060,8050
 
       - name: Run API Tests
         uses: matt-ball/newman-action@master
@@ -236,3 +236,4 @@ jobs:
       #wtf
       #oops
       # again
+      # test
