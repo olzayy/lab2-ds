@@ -14,7 +14,29 @@ services:
     ports:
       - "5432:5432"
 
-# TODO добавить сервисы
+  gateway:
+    build:
+      context: gateway
+    ports:
+      - "8080:8080"
+
+  bonus:
+    build:
+      context: bonus
+    ports:
+      - "8050:8050"
+
+  flight:
+    build:
+      context: flight
+    ports:
+      - "8060:8060"
+
+  ticket:
+    build:
+      context: ticket
+    ports:
+      - "8070:8070"
 
 volumes:
   db-data:
