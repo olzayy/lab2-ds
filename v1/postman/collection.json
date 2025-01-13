@@ -213,7 +213,7 @@
 									"    pm.expect(response.paidByMoney).to.eq(1500)",
 									"    pm.expect(response.paidByBonuses).to.eq(0)",
 									"    pm.expect(response.status).to.eq(\"PAID\")",
-									"    pm.expect(response.privilege.balance).to.gte(150)",
+									"    pm.expect(response.privilege.balance).to.eq(\"150\")",
 									"    pm.expect(response.privilege.status).to.be.not.empty",
 									"    ",
 									"    pm.collectionVariables.set(\"ticketUid\", response.ticketUid)",
