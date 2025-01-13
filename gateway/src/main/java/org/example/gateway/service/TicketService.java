@@ -186,7 +186,7 @@ public class TicketService {
         result.setPaidByBonuses(paidByBonuses);
         result.setStatus("PAID");
         result.setPrivilege(
-                new PrivilegeDTO(Integer.parseInt(privilegeResponse.getBalance()), privilegeResponse.getStatus())
+                new PrivilegeDTO(privilegeResponse.getBalance(), privilegeResponse.getStatus())
         );
         return result;
     }

@@ -49,7 +49,10 @@ public class FlightController {
     private PaginationResponseDTO getFlightsPagination(int page, int size, List<Flight> flights){
         List<FlightResponseDTO> flightResponseDTOList = new ArrayList<>();
         for(Flight flight: flights){
-            flightResponseDTOList.add(new FlightResponseDTO(flight));
+            FlightResponseDTO flightResp = new FlightResponseDTO(flight);
+            flightResp.setFromAirport(flight.getFromAirport().getCity() + " " + flight.getFromAirport().getName());
+            flightResp.setToAirport(flight.getToAirport().getCity() + " " + flight.getToAirport().getName());
+            flightResponseDTOList.add(flightResp);
         }
         return new PaginationResponseDTO(page, size, flightResponseDTOList.size(), flightResponseDTOList);
     }

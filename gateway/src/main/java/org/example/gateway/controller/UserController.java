@@ -41,7 +41,7 @@ public class UserController {
         UserInfoResponseDTO userInfoDTO = new UserInfoResponseDTO();
         userInfoDTO.setTickets(ticketsDTO);
         PrivilegeDTO privilegeDTO = new PrivilegeDTO();
-        privilegeDTO.setBalance(Integer.parseInt(privilegeInfo.getBalance()));
+        privilegeDTO.setBalance(privilegeInfo.getBalance());
         privilegeDTO.setStatus(privilegeInfo.getStatus());
         userInfoDTO.setPrivilege(privilegeDTO);
         return ResponseEntity.ok(userInfoDTO);

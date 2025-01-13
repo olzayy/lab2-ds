@@ -14,6 +14,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PrivilegeDTO {
-    private int balance;
+    private String balance;
     private String status;
 }
