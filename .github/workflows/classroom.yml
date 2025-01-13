@@ -162,13 +162,12 @@ jobs:
 
       - name: Deploy to remote server
         run: |
-          sshpass -p '${{secrets.SERVER_PASSWORD}}' scp rsoi_lab2_gateway.tar ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/tmp
-          sshpass -p '${{secrets.SERVER_PASSWORD}}' scp rsoi_lab2_bonus.tar ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/tmp
-          sshpass -p '${{secrets.SERVER_PASSWORD}}' scp rsoi_lab2_flight.tar ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/tmp
-          sshpass -p '${{secrets.SERVER_PASSWORD}}' scp rsoi_lab2_ticket.tar ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/tmp
-          sshpass -p '${{secrets.SERVER_PASSWORD}}' ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} << 'EOF'
+          scp rsoi_lab2_gateway.tar ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/tmp
+          scp rsoi_lab2_bonus.tar ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/tmp
+          scp rsoi_lab2_flight.tar ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/tmp
+          scp rsoi_lab2_ticket.tar ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/tmp
+          ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} << 'EOF'
           mkdir -p /app/rsoi_lab2
-          docker ps --filter name=rsoi_lab2_* --filter status=running -aq | xargs docker stop | xargs docker rm
           cd /tmp
           docker load < rsoi_lab2_gateway.tar
           docker load < rsoi_lab2_bonus.tar
@@ -201,7 +200,6 @@ jobs:
       - name: Run containers
         timeout-minutes: 5
         run: |
-         docker compose up -d
          ./scripts/wait-script.sh
         env:
          WAIT_PORTS: 8080,8070,8060,8050
@@ -211,7 +209,7 @@ jobs:
         with:
           collection: v1/postman/collection.json
           environment: v1/postman/environment.json
-          delayRequest: 100
+          delayRequest: 150
           reporters: '[ "cli" ]'
 
       - uses: education/autograding@v1
