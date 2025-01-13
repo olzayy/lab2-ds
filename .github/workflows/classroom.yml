@@ -162,11 +162,11 @@ jobs:
 
       - name: Deploy to remote server
         run: |
-          scp rsoi_lab2_gateway.tar ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/tmp
-          scp rsoi_lab2_bonus.tar ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/tmp
-          scp rsoi_lab2_flight.tar ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/tmp
-          scp rsoi_lab2_ticket.tar ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/tmp
-          ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} << 'EOF'
+          sshpass -p '${{secrets.SERVER_PASSWORD}}' scp rsoi_lab2_gateway.tar ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/tmp
+          sshpass -p '${{secrets.SERVER_PASSWORD}}' scp rsoi_lab2_bonus.tar ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/tmp
+          sshpass -p '${{secrets.SERVER_PASSWORD}}' scp rsoi_lab2_flight.tar ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/tmp
+          sshpass -p '${{secrets.SERVER_PASSWORD}}' scp rsoi_lab2_ticket.tar ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/tmp
+          sshpass -p '${{secrets.SERVER_PASSWORD}}' ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} << 'EOF'
           mkdir -p /app/rsoi_lab2
           cd /tmp
           docker load < rsoi_lab2_gateway.tar
